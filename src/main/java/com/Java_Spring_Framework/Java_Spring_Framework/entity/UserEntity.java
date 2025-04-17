@@ -17,6 +17,9 @@ public class UserEntity {
     @Indexed(unique = true)
     private String username;
 
+    private String password;
+
+
     public String getName() {
         return name;
     }
@@ -56,8 +59,7 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    private String password;
+    
 
     public UserEntity(String name, String email, String username, String password) {
         this.name = name;
