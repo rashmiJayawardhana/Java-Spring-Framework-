@@ -23,10 +23,12 @@ public class AuthService {
     }
 
     public UserEntity createUser(UserEntity userData){
-        UserEntity newUser = new UserEntity(userData.getName(),
+        UserEntity newUser = new UserEntity(
+                userData.getName(),
                 userData.getEmail(),
                 userData.getUsername(),
-                passwordEncoder.encode(userData.getPassword()));
+                passwordEncoder.encode(userData.getPassword())
+        );
         return userRepository.save(newUser);
     }
 }
