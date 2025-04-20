@@ -5,8 +5,10 @@ import com.Java_Spring_Framework.Java_Spring_Framework.repository.UserRepository
 import com.Java_Spring_Framework.Java_Spring_Framework.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,7 +37,7 @@ public class SecurityConfig {
                 .csrf(c->c.disable())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(r->r
-                        .requestMatchers("/login")
+                        .requestMatchers("/login", "/api/v1/auth/login", "/api/v1/auth/login/register")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
@@ -62,5 +64,10 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return new MyUserDetailsService(userRepository);  // Pass the repository
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 }

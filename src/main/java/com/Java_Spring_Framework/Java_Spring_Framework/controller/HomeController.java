@@ -22,7 +22,7 @@ public class HomeController {
 
     @PostMapping("/login")
     public String login(){
-        return jwtService.getJWTToken();
+        return null;
     }
 
     @GetMapping("/username")
