@@ -2,6 +2,7 @@ package com.Java_Spring_Framework.Java_Spring_Framework.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
@@ -19,6 +20,15 @@ public class UserEntity {
 
     private String password;
 
+    @DBRef
+    private ProfileEntity profile;
+
+    public UserEntity(String name, String email, String username, String password) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getId() {
         return id;
@@ -60,11 +70,11 @@ public class UserEntity {
         this.password = password;
     }
 
+    public ProfileEntity getProfile() {
+        return profile;
+    }
 
-    public UserEntity(String name, String email, String username, String password) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.password = password;
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
     }
 }
