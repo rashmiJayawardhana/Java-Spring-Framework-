@@ -37,14 +37,16 @@ public class SecurityConfig {
                 .csrf(c->c.disable())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(r->r
-                        .requestMatchers("/login", "/api/v1/auth/login", "/api/v1/auth/login/register")
+                        .requestMatchers("/login",
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/register"
+                        )
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider())
-                //.httpBasic(Customizer.withDefaults())
                 .build();
     }
 
