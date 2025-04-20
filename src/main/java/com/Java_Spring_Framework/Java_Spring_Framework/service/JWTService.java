@@ -38,7 +38,7 @@ public class JWTService {
                     .getPayload()
                     .getSubject();
         } catch (Exception e) {
-            return "invalid token";
+            return null;
         }
     }
 }

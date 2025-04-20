@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
+    private final JWTService jwtService;
+
     public HomeController(JWTService jwtService) {
         this.jwtService = jwtService;
     }
-
-    private final JWTService jwtService;
 
     @GetMapping
     public String getHello(){
